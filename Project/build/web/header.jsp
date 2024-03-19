@@ -37,14 +37,17 @@
             </div>
         </div>
         <div id="ctl00_divUser" style="float: right; margin-right: 16px;">
-            <c:if test="${sessionScope.account.getRole() == 0}">
-                <a href="Infor"><span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.getUsername()}</span></a>
-                </c:if>
-                <c:if test="${sessionScope.account.getRole() == 1}">
-                <a href="Lecturer" ><span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.getUsername()}</span></a>
-                </c:if>
-            | 
-            <a href="Logout" class="label label-success">logout</a> 
+            <c:if test="${sessionScope.account != null}">
+                <c:if test="${sessionScope.account.getRole() == 0}">
+                    <a href="Infor"><span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.getUsername()}</span></a>
+                    </c:if>
+                    <c:if test="${sessionScope.account.getRole() == 1}">
+                    <a href="Lecturer" ><span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.getUsername()}</span></a>
+                    </c:if>
+                |
+                <a href="Logout" class="label label-success">logout</a> 
+            </c:if>
+
         </div>
         <div style="position: absolute; top: -35px; right: 30px; width: 150px;">
         </div>

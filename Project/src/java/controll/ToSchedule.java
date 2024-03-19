@@ -29,8 +29,6 @@ public class ToSchedule extends HttpServlet {
             response.sendRedirect("Login");
         else
         {
-            
-            
             int group = Integer.parseInt(request.getParameter("groups"));
             int slot = Integer.parseInt(request.getParameter("slot"));
             DAOToSchedule ob = new DAOToSchedule();

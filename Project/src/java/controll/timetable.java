@@ -19,6 +19,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import model.Login;
 import model.Slots;
 import model.StatusStudent;
 import model.Student;
@@ -36,80 +37,85 @@ public class timetable extends HttpServlet {
         if (session.getAttribute("account") == null) {
             response.sendRedirect("Login");
         } else {
-            boolean ERROR = false;
-            DAOSlot object = new DAOSlot();
-            Student st = (Student) session.getAttribute("inforStudent");
-            String codeSt = st.getMSSV();
+            Login lg = (Login) session.getAttribute("account");
+            if (lg.getRole() == 0) {
+                boolean ERROR = false;
+                DAOSlot object = new DAOSlot();
+                Student st = (Student) session.getAttribute("inforStudent");
+                String codeSt = st.getMSSV();
 
-            int year, thisyears; // year define year , years define year of now
-            DateTimeFormatter fmy = DateTimeFormatter.ofPattern("yyyy");
-            LocalDate YearOfNow = LocalDate.now();
-            String Year = YearOfNow.format(fmy);
-            thisyears = Integer.parseInt(Year);
-            if (request.getParameter("year") == null) {
-                year = Integer.parseInt(Year);
-            } else {
-                year = 1;
-                try {
-                    year = Integer.parseInt(request.getParameter("year"));
-                } catch (NumberFormatException e) {
-                    ERROR = true;
-                }
-                if (year < thisyears - 2 || year > thisyears + 1) {
-                    ERROR = true;
-                }
-
-            }
-            if (ERROR) {
-                response.sendRedirect("timetable");
-            } else {
-                LocalDate fMonOfYear = LocalDate.of(year, 1, 1); // find the first Monday of this year
-                while (fMonOfYear.getDayOfWeek() != DayOfWeek.MONDAY) {
-                    fMonOfYear = fMonOfYear.plusDays(1);
-                }
-                LocalDate DaySelect = fMonOfYear;
-
-                // --------------------------------------------------------------------------------------------
-                String week = request.getParameter("week");
-                if (week == null) {
-                    do {
-                        DaySelect = DaySelect.plusDays(7);
-                    } while (DaySelect.compareTo(LocalDate.now()) < 0);
-                    DaySelect = DaySelect.plusDays(-7);
+                int year, thisyears; // year define year , years define year of now
+                DateTimeFormatter fmy = DateTimeFormatter.ofPattern("yyyy");
+                LocalDate YearOfNow = LocalDate.now();
+                String Year = YearOfNow.format(fmy);
+                thisyears = Integer.parseInt(Year);
+                if (request.getParameter("year") == null) {
+                    year = Integer.parseInt(Year);
                 } else {
-                    int thisWeek = 0;
+                    year = 1;
                     try {
-                        thisWeek = Integer.parseInt(week);
+                        year = Integer.parseInt(request.getParameter("year"));
                     } catch (NumberFormatException e) {
                         ERROR = true;
                     }
-                    if (thisWeek >= 54 || thisWeek <= 0) {
+                    if (year < thisyears - 2 || year > thisyears + 1) {
                         ERROR = true;
                     }
-
-                    DaySelect = DaySelect.plusDays(7 * thisWeek - 7);
 
                 }
                 if (ERROR) {
                     response.sendRedirect("timetable");
                 } else {
-                    DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    //System.out.println(DaySelect.format(fm));
-                    String Date1 = DaySelect.format(fm), Date2;
-                    DaySelect = DaySelect.plusDays(6);
-                    Date2 = DaySelect.format(fm);
-                    ArrayList<Slots> sl = object.loadSlot(codeSt, Date1, Date2);
+                    LocalDate fMonOfYear = LocalDate.of(year, 1, 1); // find the first Monday of this year
+                    while (fMonOfYear.getDayOfWeek() != DayOfWeek.MONDAY) {
+                        fMonOfYear = fMonOfYear.plusDays(1);
+                    }
+                    LocalDate DaySelect = fMonOfYear;
 
-                    request.setAttribute("CodeSt", codeSt);
-                    request.setAttribute("fMonOfYear", fMonOfYear); // first monday of year
-                    request.setAttribute("slot", sl);
-                    request.setAttribute("week", week); // week select
-                    request.setAttribute("year", year); // year select
-                    request.setAttribute("years", thisyears); //this year
-                    //request.setAttribute("years", year);
+                    // --------------------------------------------------------------------------------------------
+                    String week = request.getParameter("week");
+                    if (week == null) {
+                        do {
+                            DaySelect = DaySelect.plusDays(7);
+                        } while (DaySelect.compareTo(LocalDate.now()) < 0);
+                        DaySelect = DaySelect.plusDays(-7);
+                    } else {
+                        int thisWeek = 0;
+                        try {
+                            thisWeek = Integer.parseInt(week);
+                        } catch (NumberFormatException e) {
+                            ERROR = true;
+                        }
+                        if (thisWeek >= 54 || thisWeek <= 0) {
+                            ERROR = true;
+                        }
 
-                    request.getRequestDispatcher("timetable.jsp").forward(request, response);
+                        DaySelect = DaySelect.plusDays(7 * thisWeek - 7);
+
+                    }
+                    if (ERROR) {
+                        response.sendRedirect("timetable");
+                    } else {
+                        DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        //System.out.println(DaySelect.format(fm));
+                        String Date1 = DaySelect.format(fm), Date2;
+                        DaySelect = DaySelect.plusDays(6);
+                        Date2 = DaySelect.format(fm);
+                        ArrayList<Slots> sl = object.loadSlot(codeSt, Date1, Date2);
+
+                        request.setAttribute("CodeSt", codeSt);
+                        request.setAttribute("fMonOfYear", fMonOfYear); // first monday of year
+                        request.setAttribute("slot", sl);
+                        request.setAttribute("week", week); // week select
+                        request.setAttribute("year", year); // year select
+                        request.setAttribute("years", thisyears); //this year
+                        //request.setAttribute("years", year);
+
+                        request.getRequestDispatcher("timetable.jsp").forward(request, response);
+                    }
                 }
+            } else {
+                response.sendRedirect("Home");
             }
         }
     }

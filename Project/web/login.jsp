@@ -20,7 +20,7 @@
             <h1>Login</h1>
             <form action="Login" method="post">
                 <div class="space">
-                    <label>UserName: </label><input type="text" name="user" value="ChiÐM13">
+                    <label>UserName: </label><input type="text" name="user" value="">
                 </div>
                 <div class="space">
                     <label>PassWord: </label><input type="password" name="password" value="123456">
