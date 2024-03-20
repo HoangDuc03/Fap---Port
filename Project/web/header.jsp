@@ -25,13 +25,10 @@
             <div class="col-md-4">
                 <table>
                     <tr>
-                        <td colspan="2" class="auto-style1"><strong>FAP mobile app (myFAP) is ready at</strong></td>
+                        <td colspan="2" class="auto-style1"><strong></strong></td>
                     </tr>
                     <tr>
-                        <td><a href="#">
-                                <img src="https://fap.fpt.edu.vn/images/app-store.png" style="width: 120px; height: 40px" alt="apple store" /></a></td>
-                        <td><a href="#">
-                                <img src="https://fap.fpt.edu.vn/images/play-store.png" style="width: 120px; height: 40px" alt="google store" /></a></td>
+                       
                     </tr>
                 </table>
             </div>
