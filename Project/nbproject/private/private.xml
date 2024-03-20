@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/web/header.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/controll/Home.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/model/LecturerGroups.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/dal/DAOMarks.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/web/marks.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/dal/DAOAttendance.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/controll/Marks.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/ASSIGNMENT/Project/src/java/controll/TimeTableLecturer.java</file>
         </group>
     </open-files>
 </project-private>
