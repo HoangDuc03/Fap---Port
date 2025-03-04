@@ -16,22 +16,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <style>
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-tr:hover {
-    background-color: #ddd;
-}
-td:first-child {
-    white-space: nowrap; /* Đảm bảo văn bản không bị ngắt dòng */
-}
-        </style>
     </head>
     <body>
         <div class="container">
